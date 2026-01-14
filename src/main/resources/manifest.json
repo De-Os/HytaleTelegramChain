@@ -1,0 +1,20 @@
+{
+  "Group": "dev.deos",
+  "Name": "TelegramChain",
+  "Version": "1.0.0",
+  "Description": "Two-way chain for Telegram",
+  "Authors": [
+    {
+      "Name": "Alexander Vinogradov",
+      "Email": "al3taibi@yandex.ru",
+      "Url": "https://deos-dev.ru"
+    }
+  ],
+  "Website": "https://deos-dev.ru",
+  "ServerVersion": "*",
+  "Dependencies": {},
+  "OptionalDependencies": {},
+  "DisabledByDefault": false,
+  "IncludesAssetPack": false,
+  "Main": "dev.deos.TelegramChain"
+}
