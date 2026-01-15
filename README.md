@@ -10,4 +10,5 @@ cp path/to/HytaleServer.jar libs/HytaleServer.jar
 ```
 
 
-To package run Maven `package` job. Jar will appear in `tartet` directory
+To package run Maven `package` job. Jar will appear in `target` directory
+
