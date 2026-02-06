@@ -15,6 +15,9 @@ public class TelegramChainConfig{
             .append(new KeyedCodec<Integer>("TelegramThreadId", Codec.INTEGER),
                     (TelegramChainConfig, val, extraInfo) -> TelegramChainConfig.telegramThreadId = val,
                     (TelegramChainConfig, extraInfo) -> TelegramChainConfig.telegramThreadId).add()
+            .append(new KeyedCodec<Integer>("TelegramEventsThreadId", Codec.INTEGER),
+                    (TelegramChainConfig, val, extraInfo) -> TelegramChainConfig.telegramEventsThreadId = val,
+                    (TelegramChainConfig, extraInfo) -> TelegramChainConfig.telegramEventsThreadId).add()
             .append(new KeyedCodec<Boolean>("BroadcastToTelegram", Codec.BOOLEAN),
                     (TelegramChainConfig, val, extraInfo) -> TelegramChainConfig.broadcastToTelegram = val,
                     (TelegramChainConfig, extraInfo) -> TelegramChainConfig.broadcastToTelegram).add()
@@ -59,6 +62,7 @@ public class TelegramChainConfig{
     public String telegramBotToken = "";
     public Long telegramChatId = 0L;
     public int telegramThreadId = 0;
+    public int telegramEventsThreadId = 0;
     public boolean broadcastToTelegram = true;
     public boolean broadcastFromTelegram = true;
     public String messageServerParseMode = "HTML";

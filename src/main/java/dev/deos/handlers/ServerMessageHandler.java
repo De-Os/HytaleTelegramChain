@@ -43,7 +43,7 @@ public class ServerMessageHandler {
         values.put("${currentPlayers}", String.valueOf(currentUsers.size()));
         values.put("${totalPlayers}", String.valueOf(HytaleServer.get().getConfig().getMaxPlayers()));
 
-        sendToTelegram(values, TelegramChain.getConfig().messageServerPlayerJoinedBoilerplate);
+        sendEventsToTelegram(values, TelegramChain.getConfig().messageServerPlayerJoinedBoilerplate);
     }
 
     public static void onPlayerDisconnect(PlayerDisconnectEvent event) {
@@ -62,7 +62,7 @@ public class ServerMessageHandler {
         values.put("${currentPlayers}", String.valueOf(currentUsers.size()));
         values.put("${totalPlayers}", String.valueOf(HytaleServer.get().getConfig().getMaxPlayers()));
 
-        sendToTelegram(values, TelegramChain.getConfig().messageServerPlayerQuitBoilerplate);
+        sendEventsToTelegram(values, TelegramChain.getConfig().messageServerPlayerQuitBoilerplate);
     }
 
     public static void sendToTelegram(HashMap<String, String> replacements, String text) {
@@ -85,6 +85,29 @@ public class ServerMessageHandler {
             );
         } catch (TelegramApiException e) {
             TelegramChain.LOGGER.error("Unable to resend message to Telegram", e);
+        }
+    }
+
+    public static void sendEventsToTelegram(HashMap<String, String> replacements, String text) {
+        if (TelegramChain.TELEGRAM_BOT == null || !TelegramChain.getConfig().broadcastToTelegram) {
+            return;
+        }
+
+        var intMessage = text;
+
+        for (String key : replacements.keySet()) {
+            intMessage = intMessage.replace(key, replacements.get(key));
+        }
+
+        try {
+            TelegramChain.TELEGRAM_BOT.CLIENT.execute(
+                    TelegramChain.TELEGRAM_BOT.prepareMessageForEventsChat()
+                            .text(intMessage)
+                            .parseMode(TelegramChain.getConfig().messageServerParseMode)
+                            .build()
+            );
+        } catch (TelegramApiException e) {
+            TelegramChain.LOGGER.error("Unable to resend event message to Telegram", e);
         }
     }
 }

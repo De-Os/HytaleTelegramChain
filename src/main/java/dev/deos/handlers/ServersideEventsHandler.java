@@ -35,7 +35,7 @@ public class ServersideEventsHandler {
             TelegramChain.LOGGER.info("Telegram chain started!");
 
             if (!TelegramChain.getConfig().messageServerStarted.isEmpty()) {
-                ServerMessageHandler.sendToTelegram(new HashMap<>(), TelegramChain.getConfig().messageServerStarted);
+                ServerMessageHandler.sendEventsToTelegram(new HashMap<>(), TelegramChain.getConfig().messageServerStarted);
             }
         } catch (TelegramApiException e) {
             TelegramChain.LOGGER.error("Unable to start bot polling", e);
