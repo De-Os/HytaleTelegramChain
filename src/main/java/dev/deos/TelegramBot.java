@@ -42,4 +42,16 @@ public class TelegramBot implements LongPollingSingleThreadUpdateConsumer {
 
         return message;
     };
+
+    public SendMessage.SendMessageBuilder prepareMessageForEventsChat(){
+        var message = SendMessage.builder().chatId(TelegramChain.getConfig().telegramChatId);
+
+        if(TelegramChain.getConfig().telegramEventsThreadId != 0){
+            message.messageThreadId(TelegramChain.getConfig().telegramEventsThreadId);
+        } else if(TelegramChain.getConfig().telegramThreadId != 0){
+            message.messageThreadId(TelegramChain.getConfig().telegramThreadId);
+        }
+
+        return message;
+    };
 }

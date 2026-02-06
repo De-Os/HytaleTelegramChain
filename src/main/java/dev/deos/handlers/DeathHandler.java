@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import java.util.HashMap;
 
-import static dev.deos.handlers.ServerMessageHandler.sendToTelegram;
+import static dev.deos.handlers.ServerMessageHandler.sendEventsToTelegram;
 
 public class DeathHandler extends DeathSystems.OnDeathSystem {
     @Nonnull
@@ -52,6 +52,6 @@ public class DeathHandler extends DeathSystems.OnDeathSystem {
         values.put("${nickname}", player.getDisplayName());
         values.put("${killer}", killerName);
 
-        sendToTelegram(values, TelegramChain.getConfig().messageServerPlayerDiedBoilerplate);
+        sendEventsToTelegram(values, TelegramChain.getConfig().messageServerPlayerDiedBoilerplate);
     }
 }
